@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./c.css">
+    <script src="./jquery.js"></script>
+    <script src="./c.js"></script>
+    <title>Discord Embed Color Picker</title>
+    <meta name="Description" content="Why not?">
+    <meta name="Keywords" content="embed color picker">
+  </head>
+  <body>
+    <div class="wrapper">
+      <center>
+        <h2>Discord Embed Color Picker</h2>
+        <p>by Miles</p>
+      </center>
+      <input type="text" class="cpicker">
+      <div class="embed">
+        <input readonly value="16777215" spellcheck="none" class="embed-block">
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      function hexToRgb(hex) {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+        } : null;
+      }
+
+      $(".cpicker").spectrum({
+        color: "#fff",
+        move: function (color) {
+          var c = color.toHexString();
+          var cc = hexToRgb(c);
+          console.log(color);
+          $(".embed-block").val((256*256*cc.r+256*cc.g+cc.b));
+          $(".embed").css({"border-left-color": c});
+        }
+      });
+    </script>
+  </body>
+</html>
